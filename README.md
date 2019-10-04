@@ -39,7 +39,7 @@ new SqlCommandBuilder()
     .Where(y => y.Clause("Id", z => z.Prefix("a").Equal(1))
 ```
 
-5. INSERT INTO [Users]([Id],[Name]) VALUES (@p0, @p1)
+5. INSERT INTO [Users] ([Id],[Name]) VALUES (@p0, @p1)
 ```csharp
 new SqlCommandBuilder()
     .InsertInto(x => x.Table("Users").Column("Id").Column("Name"))
