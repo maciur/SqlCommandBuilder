@@ -10,8 +10,8 @@ namespace CommandBuilder.Extensions
                 throw new ArgumentNullException(nameof(tableName));
 
             string fromClause = !string.IsNullOrEmpty(tableAs) ?
-                $"{tableName} AS {tableAs.AddSquareBrackets()}" :
-                tableName;
+                $"{tableName.AddSquareBrackets()} AS {tableAs.AddSquareBrackets()}" :
+                tableName.AddSquareBrackets();
 
             sqlCommandBuilder.SqlBuilder.FROM(fromClause);
 

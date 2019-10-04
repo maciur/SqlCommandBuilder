@@ -16,7 +16,7 @@ namespace CommandBuilder.Configurations
             if (string.IsNullOrEmpty(table))
                 throw new ArgumentNullException(nameof(table));
 
-            Table = table;
+            Table = table.AddSquareBrackets();
         } 
         
         public InnerJoinConfiguration(string table, string tableAs) 

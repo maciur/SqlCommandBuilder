@@ -17,10 +17,10 @@ namespace CommandBuilder.Tests
             Selectors = new []
             {
                 CreateTestCase(x => x.Select(y => y.Table(z=>z.Column("*"))).From("TestTable"),
-                    $"SELECT *{Environment.NewLine}FROM TestTable" , "Select Test 1"),
+                    $"SELECT *{Environment.NewLine}FROM [TestTable]" , "Select Test 1"),
 
                 CreateTestCase(x => x.Select(y => y.Table("tt", z=>z.Column("Id"))).From("TestTable", "tt"),
-                    $"SELECT [tt].[Id]{Environment.NewLine}FROM TestTable AS [tt]", "Select Test 2"),
+                    $"SELECT [tt].[Id]{Environment.NewLine}FROM [TestTable] AS [tt]", "Select Test 2"),
 
                 CreateTestCase(x => x
                         .Select(y => y
@@ -33,7 +33,7 @@ namespace CommandBuilder.Tests
                             y.RightSide(z => z.Prefix("b").Column("Id"));
                         }),
                     $"SELECT [a].[Id], [b].[Name]{Environment.NewLine}" +
-                    $"FROM Login AS [a]{Environment.NewLine}INNER JOIN Users AS [b] ON " +
+                    $"FROM [Login] AS [a]{Environment.NewLine}INNER JOIN [Users] AS [b] ON " +
                     $"[a].[Id] = [b].[Id]", "Select Test 3"),
                 
                 CreateTestCase(x => x
@@ -47,7 +47,7 @@ namespace CommandBuilder.Tests
                             y.RightSide(z => z.Prefix("[b]").Column("Id"));
                         }),
                     $"SELECT [a].[Id], [b].[Name]{Environment.NewLine}" +
-                    $"FROM Login AS [a]{Environment.NewLine}INNER JOIN Users AS [b] ON " +
+                    $"FROM [Login] AS [a]{Environment.NewLine}INNER JOIN [Users] AS [b] ON " +
                     $"[a].[Id] = [b].[Id]", "Select Test 4"),
                 
                 CreateTestCase(x => x
@@ -62,7 +62,7 @@ namespace CommandBuilder.Tests
                         })
                         .Where(y => y.Clause("Id", z => z.Prefix("a").Equal(1))),
                     $"SELECT [a].[Id], [b].[Name]{Environment.NewLine}" +
-                    $"FROM Login AS [a]{Environment.NewLine}INNER JOIN Users AS [b] ON " +
+                    $"FROM [Login] AS [a]{Environment.NewLine}INNER JOIN [Users] AS [b] ON " +
                     $"[a].[Id] = [b].[Id]{Environment.NewLine}WHERE [a].[Id] = @p0", "Select Test 5"),
             };
 
